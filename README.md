@@ -63,3 +63,23 @@ I use 2-steps operation to do the job
 
 2. Register the .nii.gz files in the feat directory to the subject of `FreeSurfer`,
    use the script of [./shells/registerFeatdir.sh](./shells/registerFeatdir.sh).
+
+Basically, the functional of `reg-feat2anat` is used to do the registration
+
+```sh
+reg-feat2anat --feat $featdir --subject $subject
+```
+
+And it generates the nifti files in the folder of `$featdir/reg_surf-<lh | rh>-<$subject | fsaverage>`.
+The nifti has a very strange format of `1974 x 1 x 183 = 163842` for the fsaverage version.
+The document reads below
+
+> In this case, the common space is the left hemisphere of fsaverage.
+> Surface-based smoothing of 5mm FWHM is used.
+> The output lh.cope1.mgh looks like a volume because it is in mgh format, but it is really a surface stored in a volume format (note it's dimensions are 1974 x 1 x 83 = 163842 = number of vertices in fsaverage's surface).
+
+The nifti file can be read by the python package of `babel`,
+and the script of [./read_nii.py](./read_nii.py) gives an example.
+
+**Todo: I do not quite sure how to align the `1974 x 1 x 84` matrix with the `163842` vertex in the fsaverage's surface.**
+**Will `arr.flatten()` do the job?**
