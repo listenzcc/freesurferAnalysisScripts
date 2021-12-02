@@ -2,6 +2,8 @@
 
 The project records the analysis trace for the `FreeSurfer` analysis.
 
+---
+
 ## Prepare Data
 
 The `T1 MRI Image` is required to make the cortex surfer.
@@ -41,11 +43,23 @@ The `{subject}` folder will follow the structure as below
 
 I will fill the blank table in later, (maybe not).
 
+---
+
 ## Cortex visualization
 
 The `freeview` tool provides amazing GUI to display the cortex surface.
+
+---
 
 ## FSL portable
 
 If you prefer using the `FSL` to do the fMRI analysis,
 it provides the registration method to register the `feat` into cortex surface.
+
+I use 2-steps operation to do the job
+
+1. Link the directory of feat of `FSL`,
+   use the script of [./shells/linkFeatDirs.sh](./shells/linkFeatDirs.sh);
+
+2. Register the .nii.gz files in the feat directory to the subject of `FreeSurfer`,
+   use the script of [./shells/registerFeatdir.sh](./shells/registerFeatdir.sh).

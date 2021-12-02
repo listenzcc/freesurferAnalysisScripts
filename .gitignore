@@ -1,3 +1,4 @@
 *.log
 *debug*
 featdir*
+shells/registerAll.sh
