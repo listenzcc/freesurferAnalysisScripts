@@ -71,7 +71,7 @@ reg-feat2anat --feat $featdir --subject $subject
 ```
 
 And it generates the nifti files in the folder of `$featdir/reg_surf-<lh | rh>-<$subject | fsaverage>`.
-The nifti has a very strange format of `1974 x 1 x 183 = 163842` for the fsaverage version.
+The nifti has a very strange format of `1974 x 1 x 83 = 163842` for the fsaverage version.
 The document reads below
 
 > In this case, the common space is the left hemisphere of fsaverage.
@@ -83,3 +83,18 @@ and the script of [./read_nii.py](./read_nii.py) gives an example.
 
 **Todo: I do not quite sure how to align the `1974 x 1 x 84` matrix with the `163842` vertex in the fsaverage's surface.**
 **Will `arr.flatten()` do the job?**
+
+The answer is NO,
+actually, the following code will put the values into the **RIGHT** position
+
+```js
+const raw = await FileAttachment("zstat1.nii.gz.csv").csv();
+const arr = [];
+// This explains how to align .nii.gz matrix into the vertex array
+for (let j = 0; j < 83; j++) {
+    for (let i = 0; i < 1974; i++) {
+        arr.push(1.0 * raw[i][j]);
+    }
+}
+return arr;
+```
