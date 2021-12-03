@@ -2,3 +2,5 @@
 *debug*
 featdir*
 shells/registerAll.sh
+shells/groupAnalysis/example.sh
+shells/groupAnalysis/data
