@@ -5,3 +5,4 @@ shells/registerAll.sh
 shells/groupAnalysis/example.sh
 shells/groupAnalysis/batch*
 shells/groupAnalysis/data
+*.mgz
