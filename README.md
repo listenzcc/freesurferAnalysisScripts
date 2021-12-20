@@ -4,6 +4,42 @@ The project records the analysis trace for the `FreeSurfer` analysis.
 
 ---
 
+- [FreeSurfer Analysis Trace](#freesurfer-analysis-trace)
+  - [Recommend Pipeline](#recommend-pipeline)
+  - [Prepare Data](#prepare-data)
+  - [Cortex visualization](#cortex-visualization)
+  - [FSL portable](#fsl-portable)
+
+## Recommend Pipeline
+
+1. User has to convert the .nii file of the **T1 Image** into `001.mgz`.
+
+    ```sh
+    # Just convert the $NIIFile into the 001.mgz, **in the same folder**.
+    mri_convert $NIIFile 001.mgz
+    ```
+
+2. Generate the subject's folder in **freeSurfer**.
+
+    ```sh
+    # In ./shells folder
+    # The script will create subject of freeSurfer and link the 001.mgz file into it in the correct way.
+    # ! Make sure **EDIT** it to fit your own data
+    sh initFolderFreeSurferSubject.sh
+    ```
+
+3. Perform **freeSurfer** analysis in full mode.
+
+    ```sh
+    # Use setsid to set an individual process,
+    # and preserve the log file
+    # since it is **VERY** time consuming.
+    #
+    # The $SUBJECT variable is the name of the freeSurferSubject,
+    # one can find the names in the $FREESURFER_HOME/subjects
+    setsid recon-all -s $SUBJECT -all >> $SUBJECT.log
+    ```
+
 ## Prepare Data
 
 The `T1 MRI Image` is required to make the cortex surfer.

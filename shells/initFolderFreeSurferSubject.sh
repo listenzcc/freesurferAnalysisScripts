@@ -1,6 +1,6 @@
 #! /bin/sh
 
-for i in $(seq 1 9)
+for i in $(seq 11 14)
 do
     folder=$HOME/nfsHome/freesurfer/subjects/liuyeSubject$i
     echo $folder
