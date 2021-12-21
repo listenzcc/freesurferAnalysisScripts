@@ -6,11 +6,15 @@ The project records the analysis trace for the `FreeSurfer` analysis.
 
 - [FreeSurfer Analysis Trace](#freesurfer-analysis-trace)
   - [Recommend Pipeline](#recommend-pipeline)
+    - [FreeSurfer Analysis](#freesurfer-analysis)
+    - [FSL Intersection](#fsl-intersection)
   - [Prepare Data](#prepare-data)
   - [Cortex visualization](#cortex-visualization)
   - [FSL portable](#fsl-portable)
 
 ## Recommend Pipeline
+
+### FreeSurfer Analysis
 
 1. User has to convert the .nii file of the **T1 Image** into `001.mgz`.
 
@@ -20,6 +24,8 @@ The project records the analysis trace for the `FreeSurfer` analysis.
     ```
 
 2. Generate the subject's folder in **freeSurfer**.
+
+    **EDIT** is required.
 
     ```sh
     # In ./shells folder
@@ -39,6 +45,35 @@ The project records the analysis trace for the `FreeSurfer` analysis.
     # one can find the names in the $FREESURFER_HOME/subjects
     setsid recon-all -s $SUBJECT -all >> $SUBJECT.log
     ```
+
+### FSL Intersection
+
+4. Link your `FSL` folders.
+
+    ```sh
+    # In ./shells folder
+    # $FEATDIR is the feat directory of the FSL results
+    # It will make the dir of featdirs,
+    # and link the required files
+    sh linkFeatDirs $FEATDIR
+    ```
+
+5. Register the `FSL` results into the standard space
+
+    **EDIT** is required.
+
+    ```sh
+    # Edit the script as the example shows,
+    # it will automatically operate the ./registerFeatDir.sh,
+    # to finish the register jobs.
+    #
+    # ./registerFeatDir.sh $FSLFeatDir $FreeSurferSubject
+    #
+    # The setsid method is also recommended since the job is also time consuming
+    setsid sh registerAll.sh >> registerAll.log
+    ```
+
+---
 
 ## Prepare Data
 
